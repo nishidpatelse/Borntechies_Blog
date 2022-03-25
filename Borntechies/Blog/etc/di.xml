@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Born Techies Pvt. Ltd. 
+ *
+ * Born Techies Pvt. Ltd. serves customers all at one place who searches
+ * for different types of extensions for Magento 2.
+ * 
+ * DISCLAIMER
+ * 
+ * 
+ * Do not edit or add to this file if you wish to upgrade this
+ * extension to newer 
+ * version in the future.
+ *
+ * 
+ * @category Born Techies Pvt. Ltd. 
+ *
+ * @package Borntechies_Blog
+ * 
+ * @copyright Copyright (c) Born Techies Pvt. Ltd. 
+ * (https://borntechies.com/)
+ * See COPYING.txt for license details.
+ * 
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--Grid collection-->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="borntechies_blog_post_listing_data_source" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Post\Grid\Collection</item>
+                <item name="borntechies_blog_tag_listing_data_source" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Tag\Grid\Collection</item>
+                <item name="borntechies_blog_topic_listing_data_source" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Topic\Grid\Collection</item>
+                <item name="borntechies_blog_comment_listing_data_source" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Comment\Grid\Collection</item>
+                <item name="borntechies_blog_author_listing_data_source" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Author\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Borntechies\Blog\Model\ResourceModel\Author\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">borntechies_blog_author</argument>
+            <argument name="resourceModel" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Author</argument>
+        </arguments>
+    </type>
+    <virtualType name="Borntechies\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">borntechies_blog_post</argument>
+            <argument name="resourceModel" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Borntechies\Blog\Model\ResourceModel\Tag\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">borntechies_blog_tag</argument>
+            <argument name="resourceModel" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Tag</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Borntechies\Blog\Model\ResourceModel\Topic\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">borntechies_blog_topic</argument>
+            <argument name="resourceModel" xsi:type="string">Borntechies\Blog\Model\ResourceModel\Topic</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\App\Rss\RssManagerInterface">
+        <arguments>
+            <argument name="dataProviders" xsi:type="array">
+                <item name="blog_posts" xsi:type="string">Borntechies\Blog\Block\Post\Rss\Lists</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Sitemap\Model\Sitemap" type="Borntechies\Blog\Model\Sitemap"/>
+
+    <preference for="Borntechies\Blog\Api\Data\PostInterface" type="Borntechies\Blog\Model\Post" />
+    <preference for="Borntechies\Blog\Api\Data\CommentInterface" type="Borntechies\Blog\Model\Comment" />
+    <preference for="Borntechies\Blog\Api\Data\TagInterface" type="Borntechies\Blog\Model\Tag" />
+    <preference for="Borntechies\Blog\Api\Data\CategoryInterface" type="Borntechies\Blog\Model\Category" />
+    <preference for="Borntechies\Blog\Api\Data\TopicInterface" type="Borntechies\Blog\Model\Topic" />
+    <preference for="Borntechies\Blog\Api\Data\AuthorInterface" type="Borntechies\Blog\Model\Author" />
+    <preference for="Borntechies\Blog\Api\Data\BlogConfigInterface" type="Borntechies\Blog\Model\BlogConfig" />
+    <preference for="Borntechies\Blog\Api\Data\MonthlyArchiveInterface" type="Borntechies\Blog\Model\MonthlyArchive" />
+    <preference for="Borntechies\Blog\Api\Data\Config\GeneralInterface" type="Borntechies\Blog\Model\Config\General" />
+    <preference for="Borntechies\Blog\Api\Data\Config\SidebarInterface" type="Borntechies\Blog\Model\Config\Sidebar" />
+    <preference for="Borntechies\Blog\Api\Data\Config\SeoInterface" type="Borntechies\Blog\Model\Config\Seo" />
+    <preference for="Borntechies\Blog\Api\BlogRepositoryInterface" type="Borntechies\Blog\Model\Api\BlogRepository" />
+
+    <preference for="Borntechies\Blog\Api\Data\SearchResult\PostSearchResultInterface" type="Borntechies\Blog\Model\ResourceModel\Post\Collection" />
+    <preference for="Borntechies\Blog\Api\Data\SearchResult\CategorySearchResultInterface" type="Borntechies\Blog\Model\ResourceModel\Category\Collection" />
+    <preference for="Borntechies\Blog\Api\Data\SearchResult\TagSearchResultInterface" type="Borntechies\Blog\Model\ResourceModel\Tag\Collection" />
+    <preference for="Borntechies\Blog\Api\Data\SearchResult\TopicSearchResultInterface" type="Borntechies\Blog\Model\ResourceModel\Topic\Collection" />
+    <preference for="Borntechies\Blog\Api\Data\SearchResult\CommentSearchResultInterface" type="Borntechies\Blog\Model\ResourceModel\Comment\Collection" />
+</config>

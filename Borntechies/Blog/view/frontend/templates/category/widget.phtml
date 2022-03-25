@@ -1,0 +1,45 @@
+<?php
+/**
+ * Born Techies Pvt. Ltd. 
+ *
+ * Born Techies Pvt. Ltd. serves customers all at one place who searches
+ * for different types of extensions for Magento 2.
+ * 
+ * DISCLAIMER
+ * 
+ * 
+ * Do not edit or add to this file if you wish to upgrade this
+ * extension to newer 
+ * version in the future.
+ *
+ * 
+ * @category Born Techies Pvt. Ltd. 
+ *
+ * @package Borntechies_Blog
+ * 
+ * @copyright Copyright (c) Born Techies Pvt. Ltd. 
+ * (https://borntechies.com/)
+ * See COPYING.txt for license details.
+ * 
+ */
+
+use Borntechies\Blog\Block\Category\Widget;
+
+/** @var Widget $block */
+$tree = $block->getTree();
+if ($tree) : ?>
+    <div class="mp-sidebar mpcss">
+        <div class="row">
+            <div class="block-title col-xs-12 sidebar-categories">
+                <p class="block-mp-sidebar-heading" role="heading" aria-label="2"><?= $block->escapeHtml(__('Categories')) ?></p>
+            </div>
+            <div class="col-xs-12">
+                <?= $block->getCategoryTreeHtml($tree) ?>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        require(['Borntechies_Blog/js/categorytree'], function () {
+        });
+    </script>
+<?php endif; ?>

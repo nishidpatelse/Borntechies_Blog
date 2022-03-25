@@ -1,0 +1,76 @@
+<?php
+/**
+ * Born Techies Pvt. Ltd. 
+ *
+ * Born Techies Pvt. Ltd. serves customers all at one place who searches
+ * for different types of extensions for Magento 2.
+ * 
+ * DISCLAIMER
+ * 
+ * 
+ * Do not edit or add to this file if you wish to upgrade this
+ * extension to newer 
+ * version in the future.
+ *
+ * 
+ * @category Born Techies Pvt. Ltd. 
+ *
+ * @package Borntechies_Blog
+ * 
+ * @copyright Copyright (c) Born Techies Pvt. Ltd. 
+ * (https://borntechies.com/)
+ * See COPYING.txt for license details.
+ * 
+ */
+
+use Borntechies\Blog\Block\Widget\Posts;
+
+/** @var Posts $block */
+$posts = $block->getCollection();
+?>
+<div class="blog-widget-title"><a></a></div>
+<div class="post-list-container mpcss" id="blog-list-container">
+    <div class="widget-title">
+        <a href="<?= $block->escapeUrl($block->getBlogUrl('')) ?>"><?= $block->escapeHtml($block->getTitle()) ?></a>
+    </div>
+    <div class="row">
+        <?php foreach ($posts as $post) : ?>
+            <div class="post-list-item" style="margin-left: 5px">
+                <div class="post-item-wraper">
+                    <?php if ($post->getImage()) : ?>
+                        <div class="post-image">
+                            <a href="<?= $block->escapeUrl($post->getUrl()) ?>">
+                                <img class="img-responsive" style="height: 220px"
+                                     src="<?= $block->escapeUrl($block->resizeImage($post->getImage(), '400x')) ?>"
+                                     alt="<?= $block->escapeHtml($post->getName()); ?>"/>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    <div class="post-info-wraper">
+                        <h2 class="mp-post-title" style="font-size: 22px">
+                            <a class="post-link-title" title="<?= $block->escapeHtmlAttr($post->getName()) ?>"
+                               href="<?= $block->escapeUrl($post->getUrl()) ?>">
+                                <?= $block->escapeHtml($post->getName()) ?>
+                            </a>
+                        </h2>
+                        <div class="mp-post-info">
+                            <?= /** @noEscape */ $block->getPostInfo($post) ?>
+                        </div>
+                        <div class="post-short-description">
+                            <p><?= /** @noEscape */ $post->getShortDescription() ?></p>
+                        </div>
+                        <div class="mp-clearfix"></div>
+                        <div class="mp-post-meta-info mp-alignright">
+                            <div class="actions">
+                                <a class="mp-read-more" href="<?= $block->escapeUrl($post->getUrl()) ?>"
+                                   title="<?= $block->escapeHtmlAttr(__('Read More')) ?>">
+                                    <?= $block->escapeHtml(__('Read more')) ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<?php
+/**
+ * Born Techies Pvt. Ltd. 
+ *
+ * Born Techies Pvt. Ltd. serves customers all at one place who searches
+ * for different types of extensions for Magento 2.
+ * 
+ * DISCLAIMER
+ * 
+ * 
+ * Do not edit or add to this file if you wish to upgrade this
+ * extension to newer 
+ * version in the future.
+ *
+ * 
+ * @category Born Techies Pvt. Ltd. 
+ *
+ * @package Borntechies_Blog
+ * 
+ * @copyright Copyright (c) Born Techies Pvt. Ltd. 
+ * (https://borntechies.com/)
+ * See COPYING.txt for license details.
+ * 
+ */
+
+use \Borntechies\Blog\Block\Sitemap;
+use Borntechies\Blog\Helper\Data;
+
+/** @var Sitemap $block */
+$helper     = $block->getBlogHelper();
+$posts      = $helper->getPostList();
+$categories = $helper->getObjectList(Data::TYPE_CATEGORY);
+$tags       = $helper->getObjectList(Data::TYPE_TAG);
+$topics     = $helper->getObjectList(Data::TYPE_TOPIC);
+?>
+
+<?php if ($size = $posts->getSize()) : ?>
+    <h2><?= ($size == 1) ? $block->escapeHtml(__('Post')) : $block->escapeHtml(__('Posts')) ?></h2>
+    <ul>
+        <?php foreach ($posts as $post) : ?>
+            <li><a href="<?= $block->escapeUrl($post->getUrl()) ?>"><?= $block->escapeHtml($post->getName()) ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php if ($size = $categories->getSize()) : ?>
+    <h2><?= ($size == 1) ? $block->escapeHtml(__('Category')) : $block->escapeHtml(__('Categories')) ?></h2>
+    <ul>
+        <?php foreach ($categories as $category) : ?>
+            <li>
+                <a href="<?= $block->escapeUrl($helper->getBlogUrl($category, Data::TYPE_CATEGORY)) ?>">
+                    <?= $block->escapeHtml($category->getName()) ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php if ($size = $tags->getSize()) : ?>
+    <h2><?= ($size == 1) ? $block->escapeHtml(__('Tag')) : $block->escapeHtml(__('Tags')) ?></h2>
+    <ul>
+        <?php foreach ($tags as $tag) : ?>
+            <li>
+                <a href="<?= $block->escapeUrl($helper->getBlogUrl($tag, Data::TYPE_TAG)) ?>">
+                    <?= $block->escapeHtml($tag->getName()) ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php if ($size = $topics->getSize()) : ?>
+    <h2><?= ($size == 1) ? $block->escapeHtml(__('Topic')) : $block->escapeHtml(__('Topics')) ?></h2>
+    <ul>
+        <?php foreach ($topics as $topic) : ?>
+            <li>
+                <a href="<?= $block->escapeUrl($helper->getBlogUrl($topic, Data::TYPE_TOPIC)) ?>">
+                    <?= $block->escapeHtml($topic->getName()) ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
